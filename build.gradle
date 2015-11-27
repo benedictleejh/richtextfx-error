@@ -1,0 +1,28 @@
+apply plugin: 'scala'
+apply from: 'javafx.plugin'
+
+javafx.mainClass = 'Main'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    compile "org.scalafx:scalafx_2.11:8.0.60-R9"
+    compile 'org.fxmisc.richtext:richtextfx:0.6.10'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.scalatest:scalatest_2.11:2.2.5'
+    testRuntime 'org.scala-lang.modules:scala-xml_2.11:1.0.5'
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.with {
+        useAnt = false
+        useCompileDaemon = true
+        additionalParameters = [
+                "-Xexperimental"
+        ]
+    }
+}
